@@ -23,8 +23,7 @@ public class Player2 : MonoBehaviour
 
         Vector3 movement = new Vector3(0, moveHorizontal*15, 0);
         transform.Rotate(movement * rotationSpeed * Time.deltaTime);
-
-        print(Input.GetButtonDown("c1rrr"));
+        
         if (Input.GetButtonDown("c1rrr"))
         {
             speed += plusspeed;
