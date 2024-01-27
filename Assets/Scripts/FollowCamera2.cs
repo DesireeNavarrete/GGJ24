@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowCamera1 : MonoBehaviour
+public class FollowCamera2 : MonoBehaviour
 {
     public GameObject player;//target
     public Vector3 player_trans;
@@ -26,7 +26,7 @@ public class FollowCamera1 : MonoBehaviour
 
     public void Update()
     {
-        player = GameObject.FindWithTag("p1");
+        player = GameObject.FindWithTag("p2");
         followTarget = player.transform;
         // target position taking the targets rotation and the offset into account
         var targetPosition = followTarget.position + followTarget.forward * positionOffset.z + followTarget.right * positionOffset.x + followTarget.up * positionOffset.y;

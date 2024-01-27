@@ -6,6 +6,8 @@ TagManager:
   tags:
   - player
   - obstaculo
+  - p1
+  - p2
   layers:
   - Default
   - TransparentFX
