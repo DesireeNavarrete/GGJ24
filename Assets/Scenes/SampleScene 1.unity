@@ -310,7 +310,7 @@ MonoBehaviour:
   moveHorizontal: 0
   speed: 0
   speeddecrease: 0.02
-  maxspeed: 25
+  maxspeed: 12
   plusspeed: 5
   gear: 1
   clutch: 0

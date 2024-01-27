@@ -26,7 +26,7 @@ public class Player1 : MonoBehaviour
         Vector3 movement = new Vector3(0, moveHorizontal * 15, 0);
         transform.Rotate(movement * rotationSpeed * Time.deltaTime);
        
-        if (Input.GetButtonDown("reee"))
+        if (Input.GetButtonDown("reee"))//correr
         {
 
             speed += plusspeed;
@@ -44,7 +44,7 @@ public class Player1 : MonoBehaviour
 
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
         print(clutch);
-        if (Input.GetAxis("L2") != 0)
+        if (Input.GetAxis("L2") != 0)//embrague
         {
             clutch = true;
         }
@@ -59,6 +59,17 @@ public class Player1 : MonoBehaviour
         print(gear);
         print(clutchable);
         print(clutch);
+
+
+        if (Input.GetButtonDown("R1"))//subir marcha
+        {
+            print("subir marcha");
+        }
+
+        if (Input.GetButtonDown("L1"))//subir marcha
+        {
+            print("bajar marcha");
+        }
     }
 
     void gear_change()
@@ -78,7 +89,7 @@ public class Player1 : MonoBehaviour
        
     }
 
-    bool canChange()
+    bool canChange()//marchas
     {
         if (gear == 1)
         {
