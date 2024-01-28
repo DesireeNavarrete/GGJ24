@@ -24,6 +24,7 @@ public class Player1 : MonoBehaviour
     void Start()
     {
         rigis = GetComponentsInChildren<Rigidbody>(true);
+        suelo = false;
         foreach (Rigidbody r in rigis)
         {
             r.isKinematic = true;
@@ -35,7 +36,7 @@ public class Player1 : MonoBehaviour
     }
 
     GameObject respawn_closer;
-    Vector3 closer_real,closer;
+    Vector3 closer_real, closer;
     public void which_closer()
     {
         Vector3 closer = new Vector3(100000f, 100000f, 100000f);
@@ -49,8 +50,8 @@ public class Player1 : MonoBehaviour
 
             }
         }
-        print(respawn_closer);
-        print(closer);
+        //print(respawn_closer);
+        //print(closer);
         closer_real = closer;
 
     }
@@ -71,16 +72,27 @@ public class Player1 : MonoBehaviour
         //Raycast
 
         Debug.DrawRay(gameObject.transform.position, Vector3.down * 50, Color.red);
-        if (Physics.Raycast(gameObject.transform.position, Vector3.down, out hit, 10f))
+        if (suelo == false)
         {
-            if (hit.collider.tag == "suelo")
+            if (Physics.Raycast(gameObject.transform.position, Vector3.down * 50, out hit, 10f))
             {
-                suelo = true;
-            }
-            else
-                suelo =false;
-            //print(hit.collider.name);
+                if (hit.collider.tag == "suelo")
+                {
+                    foreach (Rigidbody r in rigis)
+                    {
+                        r.isKinematic = false;
+                    }
+                    myAnim.enabled = false;
+                    suelo = true;
+                    StartCoroutine("destroy_instantiate");
+                    print(hit.collider.name + "suelo");
+                }
+                else
+                    suelo = false;
+                print(hit.collider.name + "else");
 
+
+            }
 
         }
 
@@ -213,7 +225,7 @@ public class Player1 : MonoBehaviour
             //case 2:
 
             //    maxspeed = maxspeedarray[2];
-            //    if (speed > maxspeed - 2f && speed <= maxspeed)
+            //    if (speed > maxspeed - 2f)
             //    {
             //        return clutchable = true;
             //    }
@@ -225,7 +237,7 @@ public class Player1 : MonoBehaviour
             //case 3:
 
             //    maxspeed = maxspeedarray[3];
-            //    if (speed > maxspeed - 2f && speed <= maxspeed)
+            //    if (speed > maxspeed - 2f)
             //    {
             //        return clutchable = true;
             //    }
@@ -237,7 +249,7 @@ public class Player1 : MonoBehaviour
             //case 4:
 
             //    maxspeed = maxspeedarray[4];
-            //    if (speed > maxspeed - 2f && speed <= maxspeed)
+            //    if (speed > maxspeed - 2f)
             //    {
             //        return clutchable = true;
             //    }
@@ -262,7 +274,7 @@ public class Player1 : MonoBehaviour
 
             foreach (Rigidbody r in rigis)
             {
-                print("brrrrrrrrrrrr");
+                //print("brrrrrrrrrrrr");
                 r.isKinematic = false;
             }
             myAnim.enabled = false;
@@ -275,7 +287,7 @@ public class Player1 : MonoBehaviour
         if (suelo)
         {
             which_closer();
-            print(closer_real);
+            //print(closer_real);
             print("fuera");
             yield return new WaitForSeconds(3f);
             Instantiate(prefabPlayer, respawn_closer.transform.position, spawn.transform.rotation);
@@ -285,7 +297,7 @@ public class Player1 : MonoBehaviour
         else
         {
 
-            print(closer_real);
+            //print(closer_real);
             print("dentro");
             yield return new WaitForSeconds(3f);
             Instantiate(prefabPlayer, spawn.transform.position, spawn.transform.rotation);

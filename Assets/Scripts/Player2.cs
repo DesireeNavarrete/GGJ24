@@ -24,6 +24,7 @@ public class Player2 : MonoBehaviour
     void Start()
     {
         rigis = GetComponentsInChildren<Rigidbody>(true);
+        suelo = false;
         foreach (Rigidbody r in rigis)
         {
             r.isKinematic = true;
@@ -71,17 +72,27 @@ public class Player2 : MonoBehaviour
 
         //Raycast
 
-        Debug.DrawRay(gameObject.transform.position, Vector3.down * 50, Color.red);
-        if (Physics.Raycast(gameObject.transform.position, Vector3.down, out hit, 10f))
+        if (suelo == false)
         {
-            if (hit.collider.tag == "suelo")
+            if (Physics.Raycast(gameObject.transform.position, Vector3.down * 50, out hit, 10f))
             {
-                suelo = true;
-            }
-            else
-                suelo =false;
-            //print(hit.collider.name);
+                if (hit.collider.tag == "suelo")
+                {
+                    foreach (Rigidbody r in rigis)
+                    {
+                        r.isKinematic = false;
+                    }
+                    myAnim.enabled = false;
+                    suelo = true;
+                    StartCoroutine("destroy_instantiate");
+                    print(hit.collider.name + "suelo");
+                }
+                else
+                    suelo = false;
+                print(hit.collider.name + "else");
 
+
+            }
 
         }
 
@@ -276,11 +287,9 @@ public class Player2 : MonoBehaviour
         if (suelo)
         {
             which_closer();
-            print(closer_real);
+            //print(closer_real);
             print("fuera");
             yield return new WaitForSeconds(3f);
-            movement = Vector3.zero;
-            rotationSpeed = 0;
             Instantiate(prefabPlayer, respawn_closer.transform.position, spawn.transform.rotation);
             yield return new WaitForSeconds(.3f);
             Destroy(gameObject);
@@ -288,11 +297,9 @@ public class Player2 : MonoBehaviour
         else
         {
 
-            print(closer_real);
+            //print(closer_real);
             print("dentro");
             yield return new WaitForSeconds(3f);
-            movement = Vector3.zero;
-            rotationSpeed = 0;
             Instantiate(prefabPlayer, spawn.transform.position, spawn.transform.rotation);
             yield return new WaitForSeconds(.3f);
             Destroy(gameObject);
