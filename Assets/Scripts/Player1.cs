@@ -15,7 +15,6 @@ public class Player1 : MonoBehaviour
     public int[] maxspeedarray;
     public Rigidbody[] rigis;
     public GameObject[] comebacks;
-    public List<GameObject> discos = new List<GameObject>();
 
     // Animator
 
@@ -69,7 +68,6 @@ public class Player1 : MonoBehaviour
 
 
 
-
         //Raycast
 
         Debug.DrawRay(gameObject.transform.position, Vector3.down * 50, Color.red);
@@ -117,10 +115,10 @@ public class Player1 : MonoBehaviour
         //Animator
 
 
-        if (Input.GetButtonDown("Space"))
-        {
-            StartCoroutine("jumping");
-        }
+        //if (Input.GetButtonDown("Space"))
+        //{
+        //    StartCoroutine("jumping");
+        //}
 
         if (speed >= 0.1f)
         {
@@ -282,16 +280,7 @@ public class Player1 : MonoBehaviour
             StartCoroutine("destroy_instantiate");
         }
 
-        if (collision.transform.tag == "disco")
-        {
-            print("disco bb");
-            discos.Add(collision.gameObject);
-            if (discos.Count == 2)
-            {
-                discos[0].GetComponent<AudioSource>().Stop();
-                discos.Clear();
-            }
-        }
+       
 
 
     }

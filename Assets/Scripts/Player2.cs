@@ -50,8 +50,8 @@ public class Player2 : MonoBehaviour
 
             }
         }
-        print(respawn_closer);
-        print(closer);
+        //print(respawn_closer);
+        //print(closer);
         closer_real = closer;
 
     }
@@ -85,7 +85,7 @@ public class Player2 : MonoBehaviour
                     myAnim.enabled = false;
                     suelo = true;
                     StartCoroutine("destroy_instantiate");
-                    print(hit.collider.name + "suelo");
+                    //print(hit.collider.name + "suelo");
                 }
                 else
                     suelo = false;
@@ -116,10 +116,10 @@ public class Player2 : MonoBehaviour
         //Animator
 
 
-        if (Input.GetButtonDown("Space"))
-        {
-            StartCoroutine("jumping");
-        }
+        //if (Input.GetButtonDown("Space"))
+        //{
+        //    StartCoroutine("jumping");
+        //}
 
         if (speed >= 0.1f)
         {
@@ -274,12 +274,14 @@ public class Player2 : MonoBehaviour
 
             foreach (Rigidbody r in rigis)
             {
-                print("brrrrrrrrrrrr");
+                //print("brrrrrrrrrrrr");
                 r.isKinematic = false;
             }
             myAnim.enabled = false;
             StartCoroutine("destroy_instantiate");
         }
+
+        
 
     }
     IEnumerator destroy_instantiate()

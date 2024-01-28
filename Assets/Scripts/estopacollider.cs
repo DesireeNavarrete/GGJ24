@@ -9,6 +9,8 @@ public class estopacollider : MonoBehaviour
 
     public GameObject bobesponja;
 
+    public GameObject p1;
+
     private void Start()
     {
         timer = 1.5f;
@@ -16,7 +18,7 @@ public class estopacollider : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.transform.tag == "p1" || other.transform.tag == "p2")
+        if (p1 || other.transform.tag == "p2" && completed == false)
         {
             timer -= minus * Time.deltaTime;
 
@@ -38,6 +40,7 @@ public class estopacollider : MonoBehaviour
         if (completed)
         {
             bobesponja.GetComponent<Animator>().SetBool("bob", true);
+            
         }
     }
 }

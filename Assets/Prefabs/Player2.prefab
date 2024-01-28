@@ -1769,8 +1769,8 @@ MonoBehaviour:
   rotationSpeed: 10
   moveHorizontal: 0
   speed: 0
-  speeddecrease: 0.02
-  maxspeed: 12
+  speeddecrease: 0.1
+  maxspeed: 17
   plusspeed: 5
   gear: 1
   clutch: 0
@@ -1836,7 +1836,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f43f8a20bfce48b49a3576033e7ce718, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
