@@ -14,9 +14,10 @@ public class Player1 : MonoBehaviour
     public bool clutchable = false;
     public int[] maxspeedarray;
     public Rigidbody[] rigis;
+    public GameObject[] comebacks;
 
     // Animator
-    
+
     public bool jump, moving;
     public Animator myAnim;
 
@@ -26,20 +27,80 @@ public class Player1 : MonoBehaviour
         foreach (Rigidbody r in rigis)
         {
             r.isKinematic = true;
-            
+
         }
         myAnim.enabled = true;
+
+        comebacks = GameObject.FindGameObjectsWithTag("comeback");
     }
 
+    GameObject respawn_closer;
+    Vector3 closer_real,closer;
+    public void which_closer()
+    {
+        Vector3 closer = new Vector3(100000f, 100000f, 100000f);
+        foreach (GameObject cb in comebacks)
+        {
+            Vector3 distance = gameObject.transform.position - cb.transform.position;
+            if (distance.magnitude < closer.magnitude)
+            {
+                closer = distance;
+                respawn_closer = cb;
+
+            }
+        }
+        print(respawn_closer);
+        print(closer);
+        closer_real = closer;
+
+    }
     IEnumerator jumping()
     {
         myAnim.SetBool("jump", true);
         yield return new WaitForSeconds(2f);
         myAnim.SetBool("jump", false);
     }
-
+    RaycastHit hit;
+    public bool suelo;
     private void Update()
     {
+
+
+
+
+        //Raycast
+
+        Debug.DrawRay(gameObject.transform.position, Vector3.down * 50, Color.red);
+        if (Physics.Raycast(gameObject.transform.position, Vector3.down, out hit, 10f))
+        {
+            if (hit.collider.tag == "suelo")
+            {
+                suelo = true;
+            }
+            else
+                suelo =false;
+            //print(hit.collider.name);
+
+
+        }
+
+
+
+        //if (suelo == false)
+        //{
+        //    print("sdfsdf");
+        //    foreach (Rigidbody r in rigis)
+        //    {
+        //        r.isKinematic = false;
+        //        gameObject.SetActive(false);
+        //        StartCoroutine("destroy_instantiate");
+
+
+
+
+        //    }
+        //}
+
         //Animator
 
 
@@ -83,7 +144,7 @@ public class Player1 : MonoBehaviour
 
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
-        print(clutch);
+        //print(clutch);
         if (Input.GetAxis("L2") != 0)//embrague
         {
             clutch = true;
@@ -105,13 +166,13 @@ public class Player1 : MonoBehaviour
         {
             if (Input.GetButtonDown("R1"))//subir marcha
             {
-                print("subir marcha");
+                //print("subir marcha");
                 gear_change();
             }
 
             if (Input.GetButtonDown("L1"))//subir marcha
             {
-                print("bajar marcha");
+                //print("bajar marcha");
             }
         }
     }
@@ -207,16 +268,30 @@ public class Player1 : MonoBehaviour
             myAnim.enabled = false;
             StartCoroutine("destroy_instantiate");
         }
-        
+
     }
     IEnumerator destroy_instantiate()
     {
-        
-        yield return new WaitForSeconds(3f);
-        //Instantiate(prefabPlayer, spawn.transform);
-        Instantiate(prefabPlayer, spawn.transform.position, spawn.transform.rotation);
-        yield return new WaitForSeconds(.3f);
-        Destroy(gameObject);
+        if (suelo)
+        {
+            which_closer();
+            print(closer_real);
+            print("fuera");
+            yield return new WaitForSeconds(3f);
+            Instantiate(prefabPlayer, respawn_closer.transform.position, spawn.transform.rotation);
+            yield return new WaitForSeconds(.3f);
+            Destroy(gameObject);
+        }
+        else
+        {
+
+            print(closer_real);
+            print("dentro");
+            yield return new WaitForSeconds(3f);
+            Instantiate(prefabPlayer, spawn.transform.position, spawn.transform.rotation);
+            yield return new WaitForSeconds(.3f);
+            Destroy(gameObject);
+        }
 
 
 

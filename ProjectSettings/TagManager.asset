@@ -8,6 +8,8 @@ TagManager:
   - obstaculo
   - p1
   - p2
+  - suelo
+  - comeback
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - pared
   - 
   - 
   - 
