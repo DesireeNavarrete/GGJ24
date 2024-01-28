@@ -89,7 +89,7 @@ public class Player2 : MonoBehaviour
                 }
                 else
                     suelo = false;
-                print(hit.collider.name + "else");
+                //print(hit.collider.name + "else");
 
 
             }

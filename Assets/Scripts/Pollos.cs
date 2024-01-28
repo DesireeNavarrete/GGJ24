@@ -8,7 +8,7 @@ public class Pollos : MonoBehaviour
     {
         if(collision.transform.tag == "p1" || collision.transform.tag == "p2")
         {
-            print("sañldkmpakeld");
+            //sprint("sañldkmpakeld");
             gameObject.GetComponent<AudioSource>().Play();
         }
 

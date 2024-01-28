@@ -15,6 +15,7 @@ public class Player1 : MonoBehaviour
     public int[] maxspeedarray;
     public Rigidbody[] rigis;
     public GameObject[] comebacks;
+    public List<GameObject> discos = new List<GameObject>();
 
     // Animator
 
@@ -89,7 +90,7 @@ public class Player1 : MonoBehaviour
                 }
                 else
                     suelo = false;
-                print(hit.collider.name + "else");
+                //print(hit.collider.name + "else");
 
 
             }
@@ -281,6 +282,18 @@ public class Player1 : MonoBehaviour
             StartCoroutine("destroy_instantiate");
         }
 
+        if (collision.transform.tag == "disco")
+        {
+            print("disco bb");
+            discos.Add(collision.gameObject);
+            if (discos.Count == 2)
+            {
+                discos[0].GetComponent<AudioSource>().Stop();
+                discos.Clear();
+            }
+        }
+
+
     }
     IEnumerator destroy_instantiate()
     {
@@ -308,4 +321,6 @@ public class Player1 : MonoBehaviour
 
 
     }
+
+   
 }
