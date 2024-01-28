@@ -122,12 +122,12 @@ public class Player1 : MonoBehaviour
 
         //----------------------
 
-        moveHorizontal = Input.GetAxis("P1");
+        moveHorizontal = Input.GetAxis("P2");
 
         Vector3 movement = new Vector3(0, moveHorizontal * 15, 0);
         transform.Rotate(movement * rotationSpeed * Time.deltaTime);
 
-        if (Input.GetButtonDown("reee"))//correr
+        if (Input.GetButtonDown("c1rrr"))//correr
         {
             speed += plusspeed;
         }

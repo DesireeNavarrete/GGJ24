@@ -505,7 +505,7 @@ Transform:
   m_GameObject: {fileID: 439016607943837089}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.322667, y: 0.77527237, z: 0.004360676}
+  m_LocalPosition: {x: 77.96266, y: 0.528, z: -17.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -559,9 +559,11 @@ MonoBehaviour:
   clutchable: 0
   maxspeedarray: 0c000000190000002800000032000000
   rigis: []
+  comebacks: []
   jump: 0
   moving: 0
   myAnim: {fileID: 2416145941319599666}
+  suelo: 0
   spawn: {fileID: 5275960537516995804}
   prefabPlayer: {fileID: 439016607943837089}
 --- !u!136 &5593271333573259251
